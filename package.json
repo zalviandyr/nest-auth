@@ -8,6 +8,7 @@
     "dev:server": "pnpm --filter nest-auth-server start:dev",
     "build:client": "pnpm --filter nest-auth-client build",
     "build:server": "pnpm --filter nest-auth-server build",
+    "build": "pnpm build:client && pnpm build:server",
     "start": "pnpm --filter nest-auth-server start"
   },
   "author": "Zukron Alviandy",
