@@ -15,6 +15,10 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async me(authId: string) {
+    return await this.authSchema.findById(authId);
+  }
+
   async register(registerDto: RegisterDto): Promise<Auth> {
     registerDto.password = await this.hashPassword(registerDto.password);
 
