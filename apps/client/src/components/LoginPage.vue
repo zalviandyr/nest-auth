@@ -1,19 +1,12 @@
 <template>
   <div class="flex items-center justify-center h-screen bg-gray-100">
     <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
-      <h2 class="mb-6 text-2xl font-bold text-center text-gray-900">Register</h2>
+      <h2 class="mb-6 text-2xl font-bold text-center text-gray-900">Login</h2>
 
-      <form @submit.prevent="register">
+      <form @submit.prevent="login">
         <div class="mb-4">
-          <label for="name" class="block text-left text-gray-700">Name</label>
-          <input type="text" id="name" v-model="name" :disabled="isLoading" class="w-full p-2 mt-1 border rounded-md" />
-
-          <span v-if="errors.name" class="text-sm text-red-500">{{ errors.name }}</span>
-        </div>
-
-        <div class="mb-4">
-          <label for="usernam" class="block text-left text-gray-700">Username</label>
-          <input type="text" id="usernam" v-model="username" :disabled="isLoading" class="w-full p-2 mt-1 border rounded-md" />
+          <label for="username" class="block text-left text-gray-700">Username</label>
+          <input type="text" id="username" v-model="username" :disabled="isLoading" class="w-full p-2 mt-1 border rounded-md" />
 
           <span v-if="errors.username" class="text-sm text-red-500">{{ errors.username }}</span>
         </div>
@@ -27,16 +20,13 @@
 
         <button type="submit" class="w-full p-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">
           <pulse-loader v-if="isLoading" color="white" size="10px" />
-          <span v-else>Register</span>
+          <span v-else>Login</span>
         </button>
       </form>
 
       <div class="mt-6 text-center">
-        <span>
-          Already have an account?
-        </span>
-        <RouterLink to="/login" class="text-blue-500 hover:underline">
-          Login
+        <RouterLink to="/register" class="text-blue-500 hover:underline">
+          Create an account
         </RouterLink>
       </div>
     </div>
@@ -44,6 +34,7 @@
 </template>
 
 <script>
+import { storeUser } from '@/utils/storage';
 import Swal from 'sweetalert2';
 
 export default {
@@ -51,26 +42,26 @@ export default {
     return {
       errors: {},
       isLoading: false,
-      name: '',
       username: '',
       password: '',
     };
   },
   methods: {
-    register() {
+    login() {
 
-      if (this.name && this.username && this.password) {
+      if (this.username && this.password) {
         this.isLoading = true
 
-        this.axios.post('/api/auth/register', {
-          name: this.name,
+        this.axios.post('/api/auth/login', {
           username: this.username,
           password: this.password
-        }).then(() => {
+        }).then(response => {
+          const data = response.data;
+          storeUser.set(data.access_token);
+
           Swal.fire({
             icon: 'success',
-            title: 'Success',
-            text: 'You have successfully registered.',
+            title: 'Welcome back!',
             position: 'top-end',
             showConfirmButton: false,
             toast: true,
@@ -79,26 +70,22 @@ export default {
           });
 
           this.$router.push({
-            path: '/login',
+            path: '/',
             replace: true
           })
         }).catch(error => {
           const statusCode = error.response.status
-          if (statusCode === 400) {
-            this.errors.username = 'Username already exists.';
+          if (statusCode === 401) {
+            this.errors.password = 'Invalid username or password.';
           }
 
-          console.error('Registration error:', error);
+          console.error('Login error:', error);
         }).finally(() => {
           this.isLoading = false
         });
       }
 
       this.errors = {};
-
-      if (!this.name) {
-        this.errors.name = 'Name is required.';
-      }
 
       if (!this.username) {
         this.errors.username = 'Username is required.';

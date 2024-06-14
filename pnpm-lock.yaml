@@ -16,12 +16,18 @@ importers:
       core-js:
         specifier: ^3.8.3
         version: 3.37.1
+      sweetalert2:
+        specifier: ^11.11.1
+        version: 11.11.1
       vue:
         specifier: ^3.2.13
         version: 3.4.28
       vue-axios:
         specifier: ^3.5.2
         version: 3.5.2(axios@1.7.2)(vue@3.4.28)
+      vue-router:
+        specifier: ^4.3.3
+        version: 4.3.3(vue@3.4.28)
       vue-spinner:
         specifier: ^1.0.4
         version: 1.0.4
@@ -3317,6 +3323,10 @@ packages:
       - walrus
       - whiskers
     dev: true
+
+  /@vue/devtools-api@6.6.3:
+    resolution: {integrity: sha512-0MiMsFma/HqA6g3KLKn+AGpL1kgKhFWszC9U29NfpWK5LE7bjeXxySWJrOJ77hBz+TBrBQ7o4QJqbPbqbs8rJw==}
+    dev: false
 
   /@vue/reactivity@3.4.28:
     resolution: {integrity: sha512-B5uvZK0ArgBMkjK8RA9l5XP+PuQ/x99oqrcHRc78wa0pWyDje5X/isGihuiuSr0nFZTA5guoy78sJ6J8XxZv1A==}
@@ -9472,6 +9482,10 @@ packages:
       stable: 0.1.8
     dev: true
 
+  /sweetalert2@11.11.1:
+    resolution: {integrity: sha512-7jumu0I0/QdRa5R7K1mh05ZdhmsMV6rZOVtjpratZGidxyJD4Sn7rDSA+zmKHzvMef9hVTwPmDU3VxnvhVQMNg==}
+    dev: false
+
   /symbol-observable@4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
     engines: {node: '>=0.10'}
@@ -10115,6 +10129,15 @@ packages:
       watchpack: 2.4.1
       webpack: 5.92.0
     dev: true
+
+  /vue-router@4.3.3(vue@3.4.28):
+    resolution: {integrity: sha512-8Q+u+WP4N2SXY38FDcF2H1dUEbYVHVPtPCPZj/GTZx8RCbiB8AtJP9+YIxn4Vs0svMTNQcLIzka4GH7Utkx9xQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.6.3
+      vue: 3.4.28
+    dev: false
 
   /vue-spinner@1.0.4:
     resolution: {integrity: sha512-GNG2F+8BLX201JT/jUX+84Gsi3ZteVQwt9K7mues3ts9FcQ95dGn7uu6a5ndSxdYYUEzfh1KngZiOE0u+l4itA==}
