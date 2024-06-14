@@ -14,5 +14,5 @@ export class RegisterDto {
 
   @IsNotEmpty()
   @IsString()
-  readonly password: string;
+  password: string;
 }
