@@ -7,7 +7,8 @@
     "dev:client": "pnpm --filter nest-auth-client serve",
     "dev:server": "pnpm --filter nest-auth-server start:dev",
     "build:client": "pnpm --filter nest-auth-client build",
-    "build:server": "pnpm --filter nest-auth-server build"
+    "build:server": "pnpm --filter nest-auth-server build",
+    "start": "pnpm --filter nest-auth-server start"
   },
   "author": "Zukron Alviandy",
   "license": "ISC"
