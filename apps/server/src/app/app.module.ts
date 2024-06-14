@@ -11,7 +11,7 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     ConfigModule.forRoot(),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'apps/client/dist'),
+      rootPath: join(__dirname, '../../../..', 'apps/client/dist'),
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
   ],
